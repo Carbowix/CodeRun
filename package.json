@@ -1,6 +1,6 @@
 {
-  "name": "res-genie",
-  "description": "Online resume creator using Next.js, Supabase, and react-pdf",
+  "name": "code-run",
+  "description": "An online simple code compiler for different languages built with Next.js and Supabase",
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
@@ -8,7 +8,6 @@
     "dev": "next dev",
     "build": "prisma generate && prisma db push && next build",
     "start": "next start",
-    "serve": "NODE_ENV=production next start --port 3000",
     "lint": "next lint",
     "postinstall": "prisma generate",
     "prisma:studio": "prisma studio",
