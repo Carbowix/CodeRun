@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { getAuthSession } from '../../auth/[...nextauth]/route';
 import prisma from '@/lib/prisma';
-const availableThemes = ['vs', 'vs-dark', 'hc-black', 'hc-light'];
 export async function POST(req: Request) {
   try {
     const userSession = await getAuthSession();
@@ -11,8 +10,6 @@ export async function POST(req: Request) {
     const { theme, snippetId } = z
       .object({ theme: z.string(), snippetId: z.string() })
       .parse(body);
-    if (!availableThemes.includes(theme.toLowerCase()))
-      return Response.json({ message: 'Invalid theme' }, { status: 400 });
     const snippet = await prisma.snippet.findUnique({
       where: {
         id: snippetId,
@@ -39,7 +36,7 @@ export async function POST(req: Request) {
         },
       });
       return Response.json(
-        { message: 'Successfuly updated language type' },
+        { message: 'Successfuly updated theme to ' + theme },
         { status: 200 }
       );
     }

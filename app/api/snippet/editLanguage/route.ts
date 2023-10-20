@@ -8,8 +8,8 @@ export async function POST(req: Request) {
     if (!userSession)
       return Response.json({ message: 'Unauthorized access' }, { status: 401 });
     const body = await req.json();
-    const { language, snippetId } = z
-      .object({ language: z.number(), snippetId: z.string() })
+    const { codingLanguage, snippetId } = z
+      .object({ codingLanguage: z.number(), snippetId: z.string() })
       .parse(body);
     const snippet = await prisma.snippet.findUnique({
       where: {
@@ -33,11 +33,12 @@ export async function POST(req: Request) {
       await prisma.snippet.update({
         where: { id: snippetId },
         data: {
-          codingLanguage: language,
+          codingLanguage: codingLanguage,
+          code: '',
         },
       });
       return Response.json(
-        { message: 'Successfuly updated language type' },
+        { message: 'Successfuly updated coding language' },
         { status: 200 }
       );
     }

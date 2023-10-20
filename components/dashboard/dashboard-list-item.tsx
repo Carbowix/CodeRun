@@ -8,6 +8,7 @@ interface DashboardListItemProps {
   title?: string;
   snippetId?: string;
   lastUpdated?: string;
+  codingLanguage?: string;
   isSnippet: boolean;
 }
 export default function DashboardListItem({
@@ -15,6 +16,7 @@ export default function DashboardListItem({
   snippetId = 'new',
   isSnippet,
   lastUpdated,
+  codingLanguage,
 }: DashboardListItemProps) {
   const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
@@ -57,7 +59,7 @@ export default function DashboardListItem({
       >
         {isSnippet && (
           <Image
-            src="/code_placeholder.png"
+            src="/code_placeholder.jpg"
             width={128}
             height={128}
             alt="snippet picture placeholder"
@@ -81,6 +83,7 @@ export default function DashboardListItem({
       <div className="flex w-64 justify-between">
         <div className="flex flex-col gap-y-1">
           <h4 className="text-lg">{title}</h4>
+          {codingLanguage && <h5 className="text-sm">{codingLanguage}</h5>}
           {lastUpdated && (
             <h5 className="text-sm text-gray-500">
               Last updated {lastUpdated}

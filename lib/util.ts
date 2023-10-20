@@ -1,3 +1,4 @@
+import { loader } from '@monaco-editor/react';
 export function formatMessageDate(messageDate: Date): string {
   const now = new Date();
 
@@ -34,7 +35,13 @@ export function formatMessageDate(messageDate: Date): string {
   });
 }
 
-export function getLanguageById(id: number) {
+export interface selectValueProp {
+  id: number;
+  value: string;
+  label: string;
+}
+
+export function getLanguageById(id: number): selectValueProp | null {
   for (const item of allLanguages) {
     if (item.id === id) {
       return item;
@@ -43,7 +50,7 @@ export function getLanguageById(id: number) {
   return null;
 }
 
-export const allLanguages = [
+export const allLanguages: selectValueProp[] = [
   {
     id: 45,
     label: 'Assembly (NASM 2.14.02)',
@@ -125,11 +132,6 @@ export const allLanguages = [
     value: 'dart',
   },
   {
-    id: 56,
-    label: 'D (DMD 2.089.1)',
-    value: 'd',
-  },
-  {
     id: 57,
     label: 'Elixir (1.9.4)',
     value: 'elixir',
@@ -138,11 +140,6 @@ export const allLanguages = [
     id: 58,
     label: 'Erlang (OTP 22.2)',
     value: 'erlang',
-  },
-  {
-    id: 44,
-    label: 'Executable',
-    value: 'executable',
   },
   {
     id: 87,
@@ -205,11 +202,6 @@ export const allLanguages = [
     value: 'lua',
   },
   {
-    id: 89,
-    label: 'Multi-file program',
-    value: 'multi-file',
-  },
-  {
     id: 79,
     label: 'Objective-C (Clang 7.0.1)',
     value: 'objc',
@@ -238,11 +230,6 @@ export const allLanguages = [
     id: 68,
     label: 'PHP (7.4.1)',
     value: 'php',
-  },
-  {
-    id: 43,
-    label: 'Plain Text',
-    value: 'text',
   },
   {
     id: 69,
@@ -310,3 +297,115 @@ export const allLanguages = [
     value: 'vbnet',
   },
 ];
+
+const monacoThemes: { [key: string]: string } = {
+  active4d: 'Active4D',
+  'all-hallows-eve': 'All Hallows Eve',
+  amy: 'Amy',
+  'birds-of-paradise': 'Birds of Paradise',
+  blackboard: 'Blackboard',
+  'brilliance-black': 'Brilliance Black',
+  'brilliance-dull': 'Brilliance Dull',
+  'chrome-devtools': 'Chrome DevTools',
+  'clouds-midnight': 'Clouds Midnight',
+  clouds: 'Clouds',
+  cobalt: 'Cobalt',
+  dawn: 'Dawn',
+  dreamweaver: 'Dreamweaver',
+  eiffel: 'Eiffel',
+  'espresso-libre': 'Espresso Libre',
+  github: 'GitHub',
+  idle: 'IDLE',
+  katzenmilch: 'Katzenmilch',
+  'kuroir-theme': 'Kuroir Theme',
+  lazy: 'LAZY',
+  'magicwb--amiga-': 'MagicWB (Amiga)',
+  'merbivore-soft': 'Merbivore Soft',
+  merbivore: 'Merbivore',
+  'monokai-bright': 'Monokai Bright',
+  monokai: 'Monokai',
+  'night-owl': 'Night Owl',
+  'oceanic-next': 'Oceanic Next',
+  'pastels-on-dark': 'Pastels on Dark',
+  'slush-and-poppies': 'Slush and Poppies',
+  'solarized-dark': 'Solarized-dark',
+  'solarized-light': 'Solarized-light',
+  spacecadet: 'SpaceCadet',
+  sunburst: 'Sunburst',
+  'textmate--mac-classic-': 'Textmate (Mac Classic)',
+  'tomorrow-night-blue': 'Tomorrow-Night-Blue',
+  'tomorrow-night-bright': 'Tomorrow-Night-Bright',
+  'tomorrow-night-eighties': 'Tomorrow-Night-Eighties',
+  'tomorrow-night': 'Tomorrow-Night',
+  tomorrow: 'Tomorrow',
+  twilight: 'Twilight',
+  'upstream-sunburst': 'Upstream Sunburst',
+  'vibrant-ink': 'Vibrant Ink',
+  'xcode-default': 'Xcode_default',
+  zenburnesque: 'Zenburnesque',
+  iplastic: 'iPlastic',
+  idlefingers: 'idleFingers',
+  krtheme: 'krTheme',
+  monoindustrial: 'monoindustrial',
+};
+
+const defineTheme = (theme: string): Promise<void> => {
+  return new Promise<void>((res) => {
+    Promise.all([
+      loader.init(),
+      import(`monaco-themes/themes/${monacoThemes[theme]}.json`),
+    ]).then(([monaco, themeData]) => {
+      monaco.editor.defineTheme(theme, themeData);
+      res();
+    });
+  });
+};
+
+const helloWorldPrograms: { [key: string]: string } = {
+  asm: "section .data\n   hello db 'Hello, World!',10\n   helloLen equ $-hello\n\nsection .text\n   global _start\n_start:\n   mov eax, 4\n   mov ebx, 1\n   mov ecx, hello\n   mov edx, helloLen\n   int 80h\n   mov eax, 1\n   int 80h",
+  bash: 'echo "Hello, World!"',
+  basic: 'PRINT "Hello, World!"',
+  c: '#include <stdio.h>\nint main() {\n    printf("Hello, World!\\n");\n    return 0;\n}',
+  cpp: '#include <iostream>\nint main() {\n    std::cout << "Hello, World!" << std::endl;\n    return 0;\n}',
+  clojure: '(println "Hello, World!")',
+  csharp:
+    'using System;\nclass Program {\n    static void Main() {\n        Console.WriteLine("Hello, World!");\n    }\n}',
+  cobol:
+    'IDENTIFICATION DIVISION.\nPROGRAM-ID. HelloWorld.\nPROCEDURE DIVISION.\n   DISPLAY "Hello, World!".\n   STOP RUN.',
+  commonlisp: '(format t "Hello, World!")',
+  dart: 'void main() {\n    print("Hello, World!");\n}',
+  elixir: 'IO.puts "Hello, World!"',
+  erlang:
+    '-module(hello).\n-compile([export_all]).\nhello() ->\n    io:format("Hello, World!~n").',
+  fsharp:
+    'open System\n[<EntryPoint>] let main argv = Console.WriteLine("Hello, World!"); 0',
+  fortran:
+    'program HelloWorld\n   write(*,*) "Hello, World!"\nend program HelloWorld',
+  go: 'package main\nimport "fmt"\nfunc main() {\n    fmt.Println("Hello, World!")\n}',
+  groovy: 'println "Hello, World!"',
+  haskell: 'main :: IO ()\nmain = putStrLn "Hello, World!"',
+  java: 'public class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println("Hello, World!");\n    }\n}',
+  javascript: 'console.log("Hello, World!");',
+  kotlin: 'fun main() {\n    println("Hello, World!")\n}',
+  lua: 'print("Hello, World!")',
+  objc: '#import <Foundation/Foundation.h>\nint main() {\n    @autoreleasepool {\n        NSLog(@"Hello, World!");\n    }\n    return 0;\n}',
+  ocaml: 'print_endline "Hello, World!";;',
+  octave: 'printf("Hello, World!\\n");',
+  pascal: 'program HelloWorld;\nbegin\n   writeln("Hello, World!");\nend.',
+  perl: 'print "Hello, World!\\n";',
+  php: '<?php\necho "Hello, World!";\n?>',
+  prolog: "hello :- write('Hello, World!'), nl.",
+  python: 'print("Hello, World!")',
+  r: 'cat("Hello, World!\\n")',
+  ruby: 'puts "Hello, World!"',
+  rust: 'fn main() {\n    println!("Hello, World!");\n}',
+  scala:
+    'object HelloWorld {\n    def main(args: Array[String]) {\n        println("Hello, World!")\n    }\n}',
+  sql: 'SELECT "Hello, World!" AS greeting;',
+  swift: 'import Swift\nprint("Hello, World!")',
+  typescript: 'console.log("Hello, World!");',
+  vbnet:
+    'Module HelloWorld\n    Sub Main()\n        Console.WriteLine("Hello, World!")\n    End Sub\nEnd Module\n',
+};
+
+export { defineTheme, monacoThemes, helloWorldPrograms };

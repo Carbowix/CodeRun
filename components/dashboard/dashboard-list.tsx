@@ -1,11 +1,12 @@
 'use client';
-import { formatMessageDate } from '@/lib/util';
+import { formatMessageDate, getLanguageById } from '@/lib/util';
 import DashboardListItem from './dashboard-list-item';
 interface DashboardListProps {
   initSnippets: {
     id: string;
     title: string;
     updatedAt: Date;
+    codingLanguage: number;
   }[];
 }
 export default function DashboardList({ initSnippets }: DashboardListProps) {
@@ -18,6 +19,7 @@ export default function DashboardList({ initSnippets }: DashboardListProps) {
             key={snippet.id}
             snippetId={snippet.id}
             title={snippet.title}
+            codingLanguage={getLanguageById(snippet.codingLanguage)?.label}
             lastUpdated={formatMessageDate(snippet.updatedAt)}
             isSnippet
           />

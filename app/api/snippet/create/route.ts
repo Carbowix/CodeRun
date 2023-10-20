@@ -1,6 +1,7 @@
 import prisma from '@/lib/prisma';
 import { z } from 'zod';
 import { getAuthSession } from '../../auth/[...nextauth]/route';
+import { getLanguageById, helloWorldPrograms } from '@/lib/util';
 
 export async function POST(req: Request) {
   try {
@@ -22,11 +23,15 @@ export async function POST(req: Request) {
     });
 
     if (user) {
+      const helloWorldProgram =
+        helloWorldPrograms[getLanguageById(codeLanguage)?.value as string];
+      console.log(helloWorldProgram);
       const newSnippet = await prisma.snippet.create({
         data: {
           title: snippetTitle,
           isPublic: isPublic,
           codingLanguage: codeLanguage,
+          code: helloWorldProgram,
           user: {
             connect: {
               id: user.id,

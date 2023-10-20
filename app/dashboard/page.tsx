@@ -17,6 +17,7 @@ export default async function DashboardPage() {
         select: {
           id: true,
           title: true,
+          codingLanguage: true,
           updatedAt: true,
         },
       },

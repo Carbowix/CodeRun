@@ -68,6 +68,7 @@ export default function NewSnippet() {
             placeholder="Select a language"
             primaryColor="blue"
             isDisabled={loading}
+            isSearchable
           />
         </div>
         <div>
