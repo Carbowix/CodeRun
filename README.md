@@ -3,15 +3,15 @@
   <h1>CodeRun</h1>
 </div>
 
-<h3 align="center">A simple online a resume builder web app built with Next.js and Supabase</h3>
+<h3 align="center">An online simple code compiler for different languages built with Next.js and Supabase</h3>
 
 <div align="center">
   <p>
-    <a href="https://github.com/Carbowix/ResGenie/blob/main/LICENSE">
-      <img src="https://img.shields.io/github/license/carbowix/ResGenie?style=for-the-badge" alt="license mit"/>
+    <a href="https://github.com/Carbowix/CodeRun/blob/main/LICENSE">
+      <img src="https://img.shields.io/github/license/carbowix/CodeRun?style=for-the-badge" alt="license mit"/>
     </a>
-    <a href="https://github.com/Carbowix/ResGenie">
-      <img src="https://img.shields.io/github/package-json/v/carbowix/ResGenie?style=for-the-badge" alt="ResGenie version"/>
+    <a href="https://github.com/Carbowix/CodeRun">
+      <img src="https://img.shields.io/github/package-json/v/carbowix/CodeRun?style=for-the-badge" alt="CodeRun version"/>
     </a>
     <br>
     <a href="https://discord.gg/nntu7rgxtP">
@@ -19,11 +19,11 @@
     </a>
   </p>
   <br>
-    <a href="https://resgenie.vercel.app/">View Demo</a>
+    <a href="https://CodeRun.vercel.app/">View Demo</a>
     ·
-    <a href="https://github.com/Carbowix/ResGenie/issues">Report Bug</a>
+    <a href="https://github.com/Carbowix/CodeRun/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Carbowix/ResGenie/issues">Request Feature</a>
+    <a href="https://github.com/Carbowix/CodeRun/issues">Request Feature</a>
    
 </div>
  <br>
@@ -43,9 +43,8 @@
 
 # Features
 
-- **Section Customization**: Allow users to add, edit, or remove sections in their resumes. Common sections may include "Objective," "Work Experience," "Education," "Skills," and "Certifications."
-- **Export and Share**: Enable users to export their completed resumes in various formats (e.g., PDF, Word, or plain text) and share them with potential employers directly from the web app.
-- **User-Friendly Interface**: The web app should have an intuitive and user-friendly interface.
+- **Code Sharing Made Easy**: Share your code snippets effortlessly with others.
+- **Multi-Language Support**: Our online code compiler supports a wide range of programming languages, including C, C++, Java, JavaScript, Python, Ruby, and many more. You can choose the language that best suits your needs from a diverse selection of over 30 programming languages.
 
 # Getting Started
 
@@ -53,12 +52,13 @@
 
 - Latest [Node.js LTS](https://nodejs.org/en/download)
 - [Supabase](https://supabase.com/) database
+- Judge0 Compiler [RapidAPI account](https://rapidapi.com/judge0-official/api/judge0-ce)
 
 ## Installation
 
 ```bash
 # Clone repo
-git clone https://github.com/Carbowix/ResGenie.git
+git clone https://github.com/Carbowix/CodeRun.git
 
 # Install the required packages
 ## Using NPM
@@ -68,7 +68,7 @@ npm install
 yarn install
 ```
 
-- Add your Supabase and Next-Auth details to `.env.example` (don't forget to rename `.env` obviously)
+- Add your Supabase, Next-Auth, and Judge0 Compiler details to `.env.example` (don't forget to rename `.env` obviously)
 
 - Push and generate the prisma schema
 
@@ -112,4 +112,4 @@ This project is heavily based on the [nextjs-postgres-auth-starter](https://gith
 # Acknowledgements
 
 - [SYNC INTERN's](https://www.syncinterns.com/) gave me the energy to do this project
-- [ResGenie Icon](https://ideogram.ai/)
+- [CodeRun Icon](https://ideogram.ai/)

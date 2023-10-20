@@ -102,7 +102,7 @@ export default function SnippetToolbar({
   };
   return (
     <>
-      <div className="w-full h-24 flex p-2 border-b-2 border-slate-400 justify-between items-center ">
+      <div className="w-screen h-24 flex p-2 border-b-2 border-slate-400 justify-between items-center ">
         <div className="flex gap-x-2">
           <button
             disabled={isSaving || showPanel}

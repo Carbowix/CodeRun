@@ -38,6 +38,10 @@ export default function SnippetEditor({
           readOnly: guestMode,
           hideCursorInOverviewRuler: guestMode,
           overviewRulerBorder: false,
+          minimap: {
+            enabled: false,
+          },
+          contextmenu: false,
         }}
       />
     </div>

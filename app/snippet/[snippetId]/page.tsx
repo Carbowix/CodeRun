@@ -27,7 +27,7 @@ export default async function ResumePage({
   const guestMode = snippetData.isPublic && !userSession;
 
   return (
-    <div className="w-screen h-screen bg-[#131112] text-white flex flex-col overflow-y-scroll">
+    <div className="w-screen h-screen bg-[#131112] text-white flex flex-col">
       <SnippetToolbar
         guestMode={guestMode}
         snippetId={snippetData.id}

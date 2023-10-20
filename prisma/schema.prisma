@@ -53,6 +53,8 @@ model Snippet {
   code           String
   codingLanguage Int
   theme          String   @default("tomorrow-night")
+  lastOutput     String   @default("")
+  lastOutputType String?
   userId         String
   user           User     @relation("userSnippets", fields: [userId], references: [id])
   isPublic       Boolean
