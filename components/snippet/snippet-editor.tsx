@@ -16,8 +16,10 @@ export default function SnippetEditor({
   onCodeChange,
   guestMode,
 }: SnippetEditorProps) {
-  defineTheme(theme);
-  console.log(code);
+  if (typeof window !== 'undefined') {
+    // Dont ask me why but it works lol...
+    defineTheme(theme);
+  }
   const [currentCode, setCurrentCode] = useState(code);
   const handleEditorChange = (value: string | undefined) => {
     setCurrentCode(value as string);
@@ -36,10 +38,6 @@ export default function SnippetEditor({
           readOnly: guestMode,
           hideCursorInOverviewRuler: guestMode,
           overviewRulerBorder: false,
-          minimap: {
-            enabled: false,
-          },
-          contextmenu: false,
         }}
       />
     </div>

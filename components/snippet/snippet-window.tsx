@@ -1,6 +1,6 @@
 'use client';
 import { getLanguageById } from '@/lib/util';
-import { Snippet, User } from '@prisma/client';
+import { Snippet } from '@prisma/client';
 import SnippetEditor from './snippet-editor';
 import { useState } from 'react';
 

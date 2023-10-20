@@ -102,7 +102,7 @@ export default function SnippetToolbar({
   };
   return (
     <>
-      <div className="w-full h-24 flex p-2 border-b-2 border-slate-400 justify-between items-center">
+      <div className="w-full h-24 flex p-2 border-b-2 border-slate-400 justify-between items-center ">
         <div className="flex gap-x-2">
           <button
             disabled={isSaving || showPanel}
@@ -117,7 +117,7 @@ export default function SnippetToolbar({
             snippetId={snippetId}
           />
         </div>
-        <div className="flex flex-col md:flex-row gap-2 w-1/2">
+        <div className="flex flex-col md:flex-row gap-2 w-1/3">
           <Select
             options={allLanguages}
             onChange={handleLanguageSelect}
