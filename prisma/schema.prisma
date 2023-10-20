@@ -48,14 +48,14 @@ model User {
 }
 
 model Snippet {
-  id        String   @id @default(cuid())
-  title     String
-  code      String   @default("")
-  codeType  String   @default("")
-  theme     String   @default("vs")
-  userId    String
-  user      User     @relation("userSnippets", fields: [userId], references: [id])
-  isPublic  Boolean
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String   @id @default(cuid())
+  title          String
+  code           String   @default("")
+  codingLanguage Int
+  theme          String   @default("vs")
+  userId         String
+  user           User     @relation("userSnippets", fields: [userId], references: [id])
+  isPublic       Boolean
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }

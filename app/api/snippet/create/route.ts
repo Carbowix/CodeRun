@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     const { snippetTitle, isPublic, codeLanguage } = z
       .object({
         snippetTitle: z.string(),
-        codeLanguage: z.string(),
+        codeLanguage: z.number(),
         isPublic: z.boolean(),
       })
       .parse(body);
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
         data: {
           title: snippetTitle,
           isPublic: isPublic,
-          codeType: codeLanguage,
+          codingLanguage: codeLanguage,
           user: {
             connect: {
               id: user.id,

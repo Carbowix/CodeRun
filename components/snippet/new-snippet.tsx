@@ -3,32 +3,40 @@ import { FormEvent, useState } from 'react';
 import LoadingDots from '../loading-dots';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-
+import Select from 'react-tailwindcss-select';
+import { SelectValue } from 'react-tailwindcss-select/dist/components/type';
+import { allLanguages } from '@/lib/util';
 export default function NewSnippet() {
+  const [codingLanguage, setCodingLanguage] = useState<SelectValue>(null);
   const [loading, setIsLoading] = useState(false);
   const router = useRouter();
   const handleNewResumeRequest = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsLoading(true);
-    const response = await fetch('/api/snippet/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        snippetTitle: event.currentTarget.snippetTitle.value,
-        codeLanguage: event.currentTarget.codeLanguage.value,
-        isPublic: event.currentTarget.publicToggle.checked,
-      }),
-    });
+    if (!codingLanguage)
+      return toast.error('Please choose a programming language');
+    if (!loading) {
+      console.log(codingLanguage);
+      setIsLoading(true);
+      const response = await fetch('/api/snippet/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          snippetTitle: event.currentTarget.snippetTitle.value,
+          codeLanguage: (codingLanguage as any).id,
+          isPublic: event.currentTarget.publicToggle.checked,
+        }),
+      });
 
-    if (response.status === 200) {
-      const { message, resumeId } = await response.json();
-      toast.success(message);
-      router.push('/snippet/' + resumeId);
-    } else {
-      toast.error('Error has occured, try again later!');
-      setIsLoading(false);
+      if (response.status === 200) {
+        const { message, snippetId } = await response.json();
+        toast.success(message);
+        router.push('/snippet/' + snippetId);
+      } else {
+        toast.error('Error has occured, try again later!');
+        setIsLoading(false);
+      }
     }
   };
   return (
@@ -52,73 +60,15 @@ export default function NewSnippet() {
             className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-black placeholder-gray-400 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-black sm:text-sm"
           />
         </div>
-        <div>
-          <button
-            id="dropdownDefaultButton"
-            data-dropdown-toggle="dropdown"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button"
-          >
-            Select a lanaguage
-            <svg
-              className="w-2.5 h-2.5 ml-2.5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 10 6"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m1 1 4 4 4-4"
-              />
-            </svg>
-          </button>
-
-          <div
-            id="dropdown"
-            className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-          >
-            <ul
-              className="py-2 text-sm text-gray-700 dark:text-gray-200"
-              aria-labelledby="dropdownDefaultButton"
-            >
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Settings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Earnings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Sign out
-                </a>
-              </li>
-            </ul>
-          </div>
+        <div className="w-full">
+          <Select
+            options={allLanguages}
+            onChange={(value) => setCodingLanguage(value)}
+            value={codingLanguage}
+            placeholder="Select a language"
+            primaryColor="blue"
+            isDisabled={loading}
+          />
         </div>
         <div>
           <label className="relative inline-flex items-center cursor-pointer">
