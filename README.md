@@ -19,7 +19,7 @@
     </a>
   </p>
   <br>
-    <a href="https://CodeRun.vercel.app/">View Demo</a>
+    <a href="https://code-run-dusky.vercel.app">View Demo</a>
     ·
     <a href="https://github.com/Carbowix/CodeRun/issues">Report Bug</a>
     ·
