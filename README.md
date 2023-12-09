@@ -1,11 +1,7 @@
 <div align="center">
   <img src='./public/logo.png' width="100px" height="100px" />
   <h1>CodeRun</h1>
-</div>
-
-<h3 align="center">An online simple code compiler for different languages built with Next.js and Supabase</h3>
-
-<div align="center">
+  <h3>An online simple code compiler for different languages built with Next.js and Supabase</h3>
   <p>
     <a href="https://github.com/Carbowix/CodeRun/blob/main/LICENSE">
       <img src="https://img.shields.io/github/license/carbowix/CodeRun?style=for-the-badge" alt="license mit"/>
@@ -18,15 +14,14 @@
       <img src="https://img.shields.io/discord/633795546724827157?color=5865F2&logo=discord&logoColor=white" alt="Discord server" />
     </a>
   </p>
-  <br>
+  <p style="margin-top: 20px;">
     <a href="https://code-run-dusky.vercel.app">View Demo</a>
     ·
     <a href="https://github.com/Carbowix/CodeRun/issues">Report Bug</a>
     ·
     <a href="https://github.com/Carbowix/CodeRun/issues">Request Feature</a>
-   
+  <p>
 </div>
- <br>
 <details>
 <summary style="font-size: 21px;">Table of Contents</summary>
 <ol>
@@ -37,6 +32,7 @@
         <li><a href="#installation">Installation</a></li>
     </ul>
     <li><a href="#technologies">Technologies</a></li>
+    <li><a href="#showcase">Showcase</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
 </details>
 <br>
@@ -108,6 +104,14 @@ This project is heavily based on the [nextjs-postgres-auth-starter](https://gith
 - [Prisma](https://www.prisma.io/) for database ORM
 - [ESLint](https://eslint.org/) configured with some initial rules
 - [Prettier](https://prettier.io/) to enforce consistent code style
+
+# Showcase
+
+<div style="display: flex; gap: 20px; flex-wrap: wrap; margin: 20px;">
+  <img src='./misc/cr_login.png' width="800" height="600" />
+  <img src='./misc/cr_dashboard.png' width="800" height="600" />
+  <img src='./misc/cr_code.png' width="800" height="600" />
+</div>
 
 # Acknowledgements
 
